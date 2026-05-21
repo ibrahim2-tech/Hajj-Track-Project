@@ -39,7 +39,7 @@ def service_detail(request, service_id):
     
     if request.method == "POST":
         Booking.objects.create(pilgrim=request.user, service=service)
-        return redirect('detail', service_id=service_id) # Redirect to the same page
+        return redirect('detail', service_id=service_id) 
     
     bookings = service.booking_set.select_related('pilgrim__pilgrimprofile').all()
     
@@ -52,14 +52,13 @@ def service_detail(request, service_id):
 @login_required
 def add_service(request):
     if request.method == "POST":
-        # Get data from the form
+
         title = request.POST.get('title')
         category = request.POST.get('category')
         camp_location = request.POST.get('camp_location')
         description = request.POST.get('description')
         cost = request.POST.get('cost')
         
-        # Save to database
         HajjService.objects.create(
             title=title, 
             category=category, 
@@ -81,7 +80,7 @@ def update_service(request, service_id):
         service.camp_location = request.POST.get('camp_location')
         service.description = request.POST.get('description')
         service.cost = request.POST.get('cost')
-        service.save() # This saves the changes to the database
+        service.save() 
         return redirect('services_list')
         
     return render(request, 'core/update_service.html', {'service': service})
