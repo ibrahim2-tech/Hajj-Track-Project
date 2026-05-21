@@ -3,7 +3,7 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.login_view, name='login'), # Setting login as your home page
+    path('', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
     path('campaigns/', views.services_list, name='services_list'),
     path('add/', views.add_service, name='add'),
