@@ -38,8 +38,15 @@ def service_detail(request, service_id):
     service = get_object_or_404(HajjService, id=service_id)
     
     if request.method == "POST":
-        Booking.objects.create(pilgrim=request.user, service=service)
-        return redirect('detail', service_id=service_id) 
+        already_booked = Booking.objects.filter(pilgrim=request.user, service=service).exists()
+        
+        if already_booked:
+            messages.warning(request, "You have already registered for this campaign.")
+        else:
+            Booking.objects.create(pilgrim=request.user, service=service)
+            messages.success(request, "Successfully registered for this campaign!")
+        
+        return redirect('detail', service_id=service_id)
     
     bookings = service.booking_set.select_related('pilgrim__pilgrimprofile').all()
     
