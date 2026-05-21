@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<h3>Available Campaigns</h3>
+<div class="row">
+    {% for s in services %}
+    <div class="col-md-4">
+        <div class="card mb-3"><div class="card-body">
+            <h5>{{ s.title }}</h5>
+            <p>{{ s.camp_location }} | {{ s.cost }} SAR</p>
+            <a href="{% url 'detail' s.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+        </div></div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

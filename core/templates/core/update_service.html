@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="card p-4 mx-auto" style="max-width: 600px;">
+    <h4 class="mb-4">Edit Campaign: {{ service.title }}</h4>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3"><label>Title</label><input type="text" name="title" value="{{ service.title }}" class="form-control" required></div>
+        <div class="mb-3"><label>Category</label><input type="text" name="category" value="{{ service.category }}" class="form-control" required></div>
+        <div class="mb-3"><label>Location</label><input type="text" name="camp_location" value="{{ service.camp_location }}" class="form-control" required></div>
+        <div class="mb-3"><label>Description</label><textarea name="description" class="form-control" required>{{ service.description }}</textarea></div>
+        <div class="mb-3"><label>Cost (SAR)</label><input type="number" name="cost" value="{{ service.cost }}" class="form-control" required></div>
+        <button type="submit" class="btn btn-warning w-100">Update Information</button>
+    </form>
+</div>
+{% endblock %}
